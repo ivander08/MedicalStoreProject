@@ -15,7 +15,7 @@ import javax.swing.*;
  * @author Willsen Yogi P
  */
 public class MainMenu extends JFrame{
-    private JLabel headerLabel, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs;
+    private JLabel headerLabel, headerLabel2, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs, imageLabel, javaLogo;
     private JLabel inputName, inputID;
     private JButton loginButton, signOut;
     private JButton medRegButton, docAppButton, invoiceButton, patientButton;
@@ -37,10 +37,21 @@ public class MainMenu extends JFrame{
         Container container = getContentPane();
         container.setLayout(null);
         
+        ImageIcon hospitalImage = new ImageIcon(getClass().getResource("hospital.png"));
+        imageLabel = new JLabel(hospitalImage);
+        container.add(imageLabel);
+        
+        ImageIcon javaImage = new ImageIcon(getClass().getResource("java.png"));
+        javaLogo = new JLabel(javaImage);
+        container.add(javaLogo);
        
-        headerLabel = new JLabel("Java Hospital");
-        headerLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        headerLabel = new JLabel("java hospital");
+        headerLabel.setFont(new Font("Helvetica", Font.BOLD, 30));
         container.add(headerLabel);
+        
+        headerLabel2 = new JLabel("Taking care of Jakarta.");
+        headerLabel2.setFont(new Font("Helvetica", Font.ITALIC, 10));
+        container.add(headerLabel2);
         
         
         ImageIcon medIcon = new ImageIcon(getClass().getResource("medLogo2.png"));
@@ -94,19 +105,20 @@ public class MainMenu extends JFrame{
         signOut.addActionListener(buttonListen);
         
         //Bounds Setting
-        headerLabel.setBounds(350, 0, 200, 50);
+        headerLabel.setBounds(35, 20, 200, 50);
+        headerLabel2.setBounds(105, 42, 200, 50);
         
-        medRegButton.setBounds(50, 100, 100, 100);
-        medRegLabel.setBounds(40,170,150,100);
+        medRegButton.setBounds(50, 170, 100, 100);
+        medRegLabel.setBounds(40,240,150,100);
         
-        docAppButton.setBounds(270, 100, 100, 100);
-        docAppLabel.setBounds(250,170,150,100);
+        docAppButton.setBounds(270, 170, 100, 100);
+        docAppLabel.setBounds(250,240,150,100);
                 
-        invoiceButton.setBounds(50,270,100,100);
-        invoiceLabel.setBounds(63,340,150,100);
+        invoiceButton.setBounds(50,340,100,100);
+        invoiceLabel.setBounds(63,410,150,100);
         
-        patientButton.setBounds(270,270,100,100);
-        patientLabel.setBounds(265,340,150,100);
+        patientButton.setBounds(270,340,100,100);
+        patientLabel.setBounds(265,410,150,100);
         
         loginAs.setBounds(735,10,115,30);
         titleBox.setBounds(580,50,90,30);
@@ -118,11 +130,10 @@ public class MainMenu extends JFrame{
         loginButton.setBounds(750,110,70,20);
         signOut.setBounds(750,110,100,20);
         
+        imageLabel.setBounds(0,0,870,610);
+        javaLogo.setBounds(220,10,50,68);
         
-        
-        
-        
-            
+
         }
     
     private class ButtonListener implements ActionListener{
