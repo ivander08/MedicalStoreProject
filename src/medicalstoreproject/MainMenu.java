@@ -80,7 +80,7 @@ public class MainMenu extends JFrame{
         signOut = new JButton ("Sign Out");
         signOut.setVisible(false);
         
-        add(signOut);
+        container.add(signOut);
         container.add(loginAs);
         container.add(titleBox);
         container.add(genderBox);
@@ -88,7 +88,7 @@ public class MainMenu extends JFrame{
         container.add(staffID);
         container.add(inputName);
         container.add(inputID);
-        add(loginButton);
+        container.add(loginButton);
         
         loginButton.addActionListener(buttonListen);
         signOut.addActionListener(buttonListen);
