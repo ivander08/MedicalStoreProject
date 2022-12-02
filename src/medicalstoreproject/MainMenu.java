@@ -45,9 +45,12 @@ public class MainMenu extends JFrame{
         
         ImageIcon medIcon = new ImageIcon(getClass().getResource("medLogo2.png"));
         medRegButton = new JButton(medIcon);
-        docAppButton = new JButton();
-        invoiceButton = new JButton();
-        patientButton = new JButton();
+        ImageIcon docIcon = new ImageIcon(getClass().getResource("doctor.png"));
+        docAppButton = new JButton(docIcon);
+        ImageIcon invoiceIcon = new ImageIcon(getClass().getResource("invoice.png"));
+        invoiceButton = new JButton(invoiceIcon);
+        ImageIcon patientIcon = new ImageIcon(getClass().getResource("patient.png"));
+        patientButton = new JButton(patientIcon);
         
         container.add(medRegButton);
         container.add(docAppButton);
