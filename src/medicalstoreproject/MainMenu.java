@@ -33,6 +33,7 @@ public class MainMenu extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(870,610);
         setVisible(true);
+        setResizable(false);
         
         Container container = getContentPane();
         container.setLayout(null);
@@ -133,6 +134,19 @@ public class MainMenu extends JFrame{
         imageLabel.setBounds(0,0,870,610);
         javaLogo.setBounds(220,10,50,68);
         
+        //button functions
+        invoiceButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                InvoiceButton invoice = new InvoiceButton();
+                invoice.setVisible(true);
+                invoice.setSize(800,600);
+                invoice.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                invoice.setResizable(false);
+            }
+            
+        });
 
         }
     
