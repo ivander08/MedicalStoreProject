@@ -5,7 +5,11 @@
 package medicalstoreproject;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -17,9 +21,10 @@ import javax.swing.JTextField;
  * @author ivand
  */
 public class InvoiceButton extends JFrame{
-    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, line2, patientLabel;
-    private JTextField patientName;
+    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, line2, patientLabel, dateLabel;
+    private JTextField patientName, currentDate;
     private JTextArea productArea, quantityArea, priceArea;
+    private JButton calculate;
     
     InvoiceButton(){
         super("Invoice");
@@ -63,6 +68,13 @@ public class InvoiceButton extends JFrame{
         patientName.setFont(new Font("Helvetica",Font.PLAIN,25));
         add(patientName);
         
+        dateLabel = new JLabel("Current Date");
+        dateLabel.setFont(new Font("Helvetica",Font.PLAIN,15));
+        add(dateLabel);
+        currentDate = new JTextField();
+        currentDate.setFont(new Font("Helvetica",Font.PLAIN,25));
+        add(currentDate);
+        
         productArea = new JTextArea();
         productArea.setFont(new Font("Helvetica",Font.PLAIN,15));
         JScrollPane productScroll = new JScrollPane(productArea);
@@ -75,6 +87,30 @@ public class InvoiceButton extends JFrame{
         priceArea.setFont(new Font("Helvetica",Font.PLAIN,15));
         JScrollPane priceScroll = new JScrollPane(priceArea);
         add(priceScroll);
+        
+        calculate = new JButton("CALCULATE TOTAL");
+        calculate.setFont(new Font("Helvetica",Font.BOLD,25));
+        calculate.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                String[] productList = productArea.getText().split("\\n");
+                
+                String[] quantityListSTRING = quantityArea.getText().split("\\n");
+                int[] quantityList = new int[quantityListSTRING.length];
+                for(int i = 0; i < quantityListSTRING.length; i++){
+                    quantityList[i] = Integer.parseInt(quantityListSTRING[i]); 
+                }
+                
+                String[] priceListSTRING = priceArea.getText().split("\\n");
+                int[] priceList = new int[priceListSTRING.length];
+                for(int i = 0; i < priceListSTRING.length; i++){
+                    priceList[i] = Integer.parseInt(priceListSTRING[i]); 
+                }     
+            }
+        });
+        
+        add(calculate);
         
         
         //Bounding
@@ -94,8 +130,12 @@ public class InvoiceButton extends JFrame{
         quantityScroll.setBounds(315,170,150,240);
         priceScroll.setBounds(575,170,150,240);
         
-        patientLabel.setBounds(80,450,120,50);
-        patientName.setBounds(65,500,120,50);
+        patientLabel.setBounds(80,440,120,50);
+        patientName.setBounds(65,485,120,50);
+        dateLabel.setBounds(230,440,120,50);
+        currentDate.setBounds(215,485,120,50);
+        
+        calculate.setBounds(425,465,300,70);
         
         
         
