@@ -51,12 +51,6 @@ public class RegistrationForm extends JFrame {
     container= getContentPane();
     container.setLayout(null);
     
-    yangBuat = new JLabel("Dibuat oleh Gavriel 535220049 Jl. Tambora V no 145");
-    add(yangBuat);
-    
-    yangBuat.setBounds(550,0,300,20);
-    
-    
     
     lbTitle= new JLabel("Registration Form");
     lbTitle.setFont(new Font("Arial",Font.PLAIN,30));
@@ -178,7 +172,7 @@ public class RegistrationForm extends JFrame {
     
     taOutput= new JTextArea();
     taOutput.setFont(new Font("Arial",Font.PLAIN,15));
-    taOutput.setSize(200,500);
+    taOutput.setSize(200,200);
     taOutput.setLocation(500,100);
     taOutput.setLineWrap(true);
     container.add(taOutput);
