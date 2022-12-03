@@ -22,9 +22,9 @@ import javax.swing.table.DefaultTableModel;
  * @author ivand
  */
 public class AppointmentButton extends JFrame {
-    private JLabel name, doctor, date, reason, mobile, title;
-    private JTextField nameField, doctorField, dateField, reasonField, mobileField;
-    private JButton add;
+    private JLabel name, doctor, date, reason, mobile, title, deleteLabel;
+    private JTextField nameField, doctorField, dateField, reasonField, mobileField, deleteTF;
+    private JButton add, deleteButton;
     String column[] = {"NAME", "DOCTOR", "DATE", "REASON", "MOBILE"};
     String data[][] = {{"Ivander", "Gavriel", "3 December 2022", "Pneumonia", "081377758897"}};
     private JTable table;
@@ -125,6 +125,24 @@ public class AppointmentButton extends JFrame {
             }
         });
         
+        deleteLabel = new JLabel("Delete Row :");
+        add(deleteLabel);
+        deleteTF = new JTextField();
+        add(deleteTF);
+        deleteButton = new JButton("OK");
+        add(deleteButton);
+            
+            //deleteButton Function
+            deleteButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectRow = Integer.valueOf(deleteTF.getText()) - 1; 
+                deleteTF.setText("");
+                tableModel.removeRow(selectRow);
+            }
+                
+            });
+        
         //Bounding
         title.setBounds(250,10,500,50);
         
@@ -139,10 +157,12 @@ public class AppointmentButton extends JFrame {
         dateField.setBounds(325,170,400,50);
         reasonField.setBounds(325,220,400,50);
         mobileField.setBounds(325,270,400,50);
-        
         add.setBounds(150,335,500,50);
+        tableScroll.setBounds(40,400,700,325);
         
-        tableScroll.setBounds(40,400,700,350);
+        deleteLabel.setBounds(40, 705, 90, 70);
+        deleteTF.setBounds(115,732,40,20);
+        deleteButton.setBounds(155,732,80,20);
         
         
     }

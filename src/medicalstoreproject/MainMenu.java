@@ -58,7 +58,6 @@ public class MainMenu extends JFrame{
         container.add(versionLabel);
         
         
-        
         ImageIcon medIcon = new ImageIcon(getClass().getResource("medLogo2.png"));
         medRegButton = new JButton(medIcon);
         ImageIcon docIcon = new ImageIcon(getClass().getResource("doctor.png"));
@@ -219,10 +218,10 @@ public class MainMenu extends JFrame{
             container.add(imageLabel);
             imageLabel.setBounds(0,0,870,610);
             
-            medRegButton.setEnabled(false);
-            docAppButton.setEnabled(false);
-            invoiceButton.setEnabled(false);
-            patientButton.setEnabled(false);
+            medRegButton.setEnabled(true);
+            docAppButton.setEnabled(true);
+            invoiceButton.setEnabled(true);
+            patientButton.setEnabled(true);
 
         }
     
