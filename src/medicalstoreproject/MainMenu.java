@@ -16,7 +16,7 @@ import javax.swing.*;
  * @author Willsen Yogi P
  */
 public class MainMenu extends JFrame{
-    private JLabel headerLabel, headerLabel2, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs, imageLabel, javaLogo;
+    private JLabel headerLabel, headerLabel2, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs, imageLabel, javaLogo, versionLabel;
     private JLabel inputName, inputID;
     private JButton loginButton, signOut;
     private JButton medRegButton, docAppButton, invoiceButton, patientButton;
@@ -55,6 +55,10 @@ public class MainMenu extends JFrame{
         headerLabel2.setFont(new Font("Helvetica", Font.ITALIC, 10));
         container.add(headerLabel2);
         
+        versionLabel = new JLabel("V1.0.0");
+        container.add(versionLabel);
+        
+        
         
         ImageIcon medIcon = new ImageIcon(getClass().getResource("medLogo2.png"));
         medRegButton = new JButton(medIcon);
@@ -80,8 +84,9 @@ public class MainMenu extends JFrame{
         container.add(invoiceLabel);
         container.add(patientLabel);
         
-        ButtonListener buttonListen = new MainMenu.ButtonListener();
+        LoginListener loginListen = new MainMenu.LoginListener();
         
+        //login components
         loginAs = new JLabel("Input Login Details");
         titleBox = new JComboBox(titleList);
         genderBox = new JComboBox(genderList);
@@ -103,8 +108,8 @@ public class MainMenu extends JFrame{
         container.add(inputID);
         container.add(loginButton);
         
-        loginButton.addActionListener(buttonListen);
-        signOut.addActionListener(buttonListen);
+        loginButton.addActionListener(loginListen);
+        signOut.addActionListener(loginListen);
         
         //Bounds Setting
         headerLabel.setBounds(35, 20, 200, 50);
@@ -134,6 +139,7 @@ public class MainMenu extends JFrame{
         
         javaLogo.setBounds(220,10,50,68);
         imageLabel.setBounds(0,0,870,610);
+        versionLabel.setBounds(0,550,100,30);
         
         //button functions
         invoiceButton.addActionListener(new ActionListener(){
@@ -174,10 +180,22 @@ public class MainMenu extends JFrame{
             }
             
         });
+        
+        medRegButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MedRegistration medr = new MedRegistration();
+                medr.setVisible(true);
+                medr.setSize(800,950);
+                medr.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                medr.setResizable(false);
+            }
+            
+        });
 
         }
     
-    private class ButtonListener implements ActionListener{
+    private class LoginListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -199,7 +217,7 @@ public class MainMenu extends JFrame{
                 
                 signOut.setVisible(true);
                  
-        } else{
+        } 
             if(e.getSource() == signOut){
                 loginAs.setText("Input Login Details");
                 inputID.setText("Staff ID : ");
@@ -215,7 +233,20 @@ public class MainMenu extends JFrame{
                 nameTF.setText("");
                 staffID.setText("");
                 }
-        }
+            
+            if(nameTF.getText().equals("") || staffID.getText().equals("") || genderBox.getSelectedItem().equals("")|| titleBox.getSelectedItem().equals("")){
+                loginAs.setText("Input Login Details");
+                inputID.setText("Staff ID : ");inputName.setText("");
+                
+                signOut.setVisible(false);
+                titleBox.setVisible(true);
+                genderBox.setVisible(true);
+                nameTF.setVisible(true);
+                staffID.setVisible(true);
+                loginButton.setVisible(true);
+                JOptionPane.showMessageDialog(MainMenu.this, "Please enter valid login details!");
+            }
+        
         
     }
     }
