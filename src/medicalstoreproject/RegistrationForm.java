@@ -175,6 +175,7 @@ public class RegistrationForm extends JFrame {
     taOutput.setSize(200,200);
     taOutput.setLocation(500,100);
     taOutput.setLineWrap(true);
+    taOutput.setEditable(false);
     container.add(taOutput);
     
     }
