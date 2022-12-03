@@ -22,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AppointmentButton extends JFrame {
     private JLabel name, doctor, date, reason, mobile, title;
-    private JTextField nameField, doctorField, dateField, emailField, mobileField;
+    private JTextField nameField, doctorField, dateField, reasonField, mobileField;
     private JButton add;
     String column[] = {"NAME", "DOCTOR", "DATE", "REASON", "MOBILE"};
     String data[][] = {{"Ivander", "Gavriel", "3 December 2022", "Pneumonia", "081377758897"}};
     private JTable table;
+    int i = 1;
     
     AppointmentButton(){
         super("Doctor's Appointment List");
@@ -63,10 +64,27 @@ public class AppointmentButton extends JFrame {
         add(doctorField);
         dateField = new JTextField();
         add(dateField);
-        emailField = new JTextField();
-        add(emailField);
+        reasonField = new JTextField();
+        add(reasonField);
         mobileField = new JTextField();
         add(mobileField);
+        
+        /*
+        table = new JTable(data,column);
+        JScrollPane tableScroll = new JScrollPane(table);
+        add(tableScroll);
+*/
+        DefaultTableModel tableModel = new DefaultTableModel();
+        table = new JTable(tableModel);
+        JScrollPane tableScroll = new JScrollPane(table);
+        tableModel.addColumn("NAME");
+        tableModel.addColumn("DOCTOR");
+        tableModel.addColumn("DATE");
+        tableModel.addColumn("REASON");
+        tableModel.addColumn("MOBILE");
+        tableModel.insertRow(0, new Object[] {"Ivander", "Gavriel","3 December 2022","Black","081377758897"});
+        add(tableScroll);
+        
         
         add = new JButton("Add New Appointment");
         add.setFont(new Font("Helvetica", Font.PLAIN, 30));
@@ -79,19 +97,13 @@ public class AppointmentButton extends JFrame {
                 String newName = nameField.getText();
                 String newDoctor = doctorField.getText();
                 String newDate = dateField.getText();
-                String newEmail = emailField.getText();
+                String newReason = reasonField.getText();
                 String newMobile = mobileField.getText();
                 
-                Object[] newRow = {newName, newDoctor, newDate, newEmail, newMobile};
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(newRow);
+                tableModel.insertRow(i, new Object[]{newName,newDoctor,newDate,newReason,newMobile});
+                i++;
             }
-            
         });
-        
-        table = new JTable(data,column);
-        JScrollPane tableScroll = new JScrollPane(table);
-        add(tableScroll);
         
         //Bounding
         title.setBounds(250,10,500,50);
@@ -105,7 +117,7 @@ public class AppointmentButton extends JFrame {
         nameField.setBounds(325,70,400,50);
         doctorField.setBounds(325,120,400,50);
         dateField.setBounds(325,170,400,50);
-        emailField.setBounds(325,220,400,50);
+        reasonField.setBounds(325,220,400,50);
         mobileField.setBounds(325,270,400,50);
         
         add.setBounds(150,335,500,50);

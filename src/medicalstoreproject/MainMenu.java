@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 /**
  *
@@ -38,7 +39,7 @@ public class MainMenu extends JFrame{
         Container container = getContentPane();
         container.setLayout(null);
         
-        ImageIcon hospitalImage = new ImageIcon(getClass().getResource("hospital.png"));
+        ImageIcon hospitalImage = new ImageIcon(getClass().getResource("hospital3.png"));
         imageLabel = new JLabel(hospitalImage);
         container.add(imageLabel);
         
@@ -131,8 +132,8 @@ public class MainMenu extends JFrame{
         loginButton.setBounds(750,110,70,20);
         signOut.setBounds(750,110,100,20);
         
-        imageLabel.setBounds(0,0,870,610);
         javaLogo.setBounds(220,10,50,68);
+        imageLabel.setBounds(0,0,870,610);
         
         //button functions
         invoiceButton.addActionListener(new ActionListener(){
