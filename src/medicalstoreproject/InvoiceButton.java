@@ -172,6 +172,9 @@ public class InvoiceButton extends JFrame{
         });
         add(calculate);
         
+        ImageIcon javaImage2 = new ImageIcon(getClass().getResource("java2.png"));
+        javaLogo2 = new JLabel(javaImage2);
+        add(javaLogo2);
         headerLabel3 = new JLabel("java hospital");
         headerLabel3.setFont(new Font("Helvetica", Font.BOLD, 20));
         add(headerLabel3);
@@ -213,6 +216,7 @@ public class InvoiceButton extends JFrame{
         
         calculate.setBounds(425,465,300,70);
         
+        javaLogo2.setBounds(950,10,38,52);
         headerLabel3.setBounds(825, 10, 125, 50);
         headerLabel4.setBounds(868, 28, 125, 50); 
         invoiceTab.setBounds(860, 60, 300, 50);

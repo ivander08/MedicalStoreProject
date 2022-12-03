@@ -147,6 +147,19 @@ public class MainMenu extends JFrame{
             }
             
         });
+        
+        docAppButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                AppointmentButton appointment = new AppointmentButton();
+                appointment.setVisible(true);
+                appointment.setSize(800,800);
+                appointment.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                appointment.setResizable(false);
+            }
+            
+        });
 
         }
     
