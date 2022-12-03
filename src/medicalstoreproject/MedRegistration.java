@@ -13,9 +13,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Willsen Yogi P
  */
 public class MedRegistration extends JFrame{
-    private JLabel title, medNameLabel, producedByLabel, expLabel, medIngLabel, sideEffectLabel, batchLabel, ageLabel;
-    private JButton addButton;
-    private JTextField nameTF, brandTF, expTF, medIngTF, sideEffectTF, batchTF;
+    private JLabel title, medNameLabel, producedByLabel, expLabel, medIngLabel, sideEffectLabel, batchLabel, ageLabel, deleteLabel;
+    private JButton addButton, deleteButton;
+    private JTextField nameTF, brandTF, expTF, medIngTF, sideEffectTF, batchTF, deleteTF;
     private JTable table;
     private JComboBox ageBox;
    
@@ -132,7 +132,26 @@ public class MedRegistration extends JFrame{
             }
             
         });
-       
+        
+        
+        deleteLabel = new JLabel("Delete Row :");
+        add(deleteLabel);
+        deleteTF = new JTextField();
+        add(deleteTF);
+        deleteButton = new JButton("OK");
+        add(deleteButton);
+            
+            //deleteButton Function
+            deleteButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectRow = Integer.valueOf(deleteTF.getText()) - 1; 
+                deleteTF.setText("");
+                tableModel.removeRow(selectRow);
+            }
+                
+            });
+        
         //Bounds Setting
         title.setBounds(190,10,500,50);
         medNameLabel.setBounds(5,70,300,50);
@@ -154,6 +173,10 @@ public class MedRegistration extends JFrame{
         addButton.setBounds(150,425,500,50);
         
         tableScroll.setBounds(40,485,700,400);
+        
+        deleteLabel.setBounds(40, 860, 90, 70);
+        deleteTF.setBounds(115,887,40,20);
+        deleteButton.setBounds(155,887,80,20);
         
         
     }

@@ -207,7 +207,7 @@ public class MainMenu extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 MedRegistration medr = new MedRegistration();
                 medr.setVisible(true);
-                medr.setSize(800,950);
+                medr.setSize(800,955);
                 medr.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 medr.setResizable(false);
             }
