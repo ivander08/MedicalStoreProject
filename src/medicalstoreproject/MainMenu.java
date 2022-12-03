@@ -16,7 +16,7 @@ import javax.swing.*;
  * @author Willsen Yogi P
  */
 public class MainMenu extends JFrame{
-    private JLabel headerLabel, headerLabel2, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs, imageLabel, javaLogo, versionLabel;
+    private JLabel headerLabel, headerLabel2, medRegLabel, docAppLabel, invoiceLabel, patientLabel, loginAs, imageLabel, javaLogo, versionLabel, usernameLabel, passwordLabel;
     private JLabel inputName, inputID;
     private JButton loginButton, signOut;
     private JButton medRegButton, docAppButton, invoiceButton, patientButton;
@@ -38,21 +38,20 @@ public class MainMenu extends JFrame{
         
         Container container = getContentPane();
         container.setLayout(null);
+      
         
-        ImageIcon hospitalImage = new ImageIcon(getClass().getResource("hospital3.png"));
-        imageLabel = new JLabel(hospitalImage);
-        container.add(imageLabel);
-        
-        ImageIcon javaImage = new ImageIcon(getClass().getResource("java.png"));
+        ImageIcon javaImage = new ImageIcon(getClass().getResource("java3.png"));
         javaLogo = new JLabel(javaImage);
         container.add(javaLogo);
        
         headerLabel = new JLabel("java hospital");
         headerLabel.setFont(new Font("Helvetica", Font.BOLD, 30));
+        headerLabel.setForeground(Color.WHITE);
         container.add(headerLabel);
         
         headerLabel2 = new JLabel("Taking care of Jakarta.");
         headerLabel2.setFont(new Font("Helvetica", Font.ITALIC, 10));
+        headerLabel2.setForeground(Color.WHITE);
         container.add(headerLabel2);
         
         versionLabel = new JLabel("V1.0.0");
@@ -75,7 +74,7 @@ public class MainMenu extends JFrame{
         container.add(patientButton);
         
         medRegLabel = new JLabel("Medicine Registration");
-        docAppLabel = new JLabel("Doctor Appointment List");
+        docAppLabel = new JLabel("Doctor's Appointment List");
         invoiceLabel = new JLabel("Print Invoice");
         patientLabel = new JLabel("Patient Registration");
         
@@ -88,15 +87,36 @@ public class MainMenu extends JFrame{
         
         //login components
         loginAs = new JLabel("Input Login Details");
+        loginAs.setFont(new Font("Helvetica", Font.BOLD, 20));
+        loginAs.setForeground(Color.WHITE);
         titleBox = new JComboBox(titleList);
         genderBox = new JComboBox(genderList);
+        
+        ImageIcon userImage = new ImageIcon(getClass().getResource("username.png"));
+        usernameLabel = new JLabel(userImage);
+        container.add(usernameLabel);
+        
+        ImageIcon passImage = new ImageIcon(getClass().getResource("staffid.png"));
+        passwordLabel = new JLabel(passImage);
+        container.add(passwordLabel);
+        
         nameTF = new JTextField();
         staffID = new JTextField();
+        
         inputName = new JLabel();
+        inputName.setFont(new Font("Helvetica", Font.BOLD, 15));
+        inputName.setForeground(Color.WHITE);
         inputID = new JLabel("Staff ID :");
+        inputID.setFont(new Font("Helvetica", Font.BOLD, 15));
+        inputID.setForeground(Color.WHITE);
         loginButton = new JButton("Login");
+        loginButton.setBackground(new Color(236,151,6));
+        loginButton.setForeground(Color.WHITE);
         signOut = new JButton ("Sign Out");
+        signOut.setBackground(new Color(236,151,6));
+        signOut.setForeground(Color.WHITE);
         signOut.setVisible(false);
+        
         
         container.add(signOut);
         container.add(loginAs);
@@ -112,33 +132,34 @@ public class MainMenu extends JFrame{
         signOut.addActionListener(loginListen);
         
         //Bounds Setting
-        headerLabel.setBounds(35, 20, 200, 50);
-        headerLabel2.setBounds(105, 42, 200, 50);
+        headerLabel.setBounds(35, 40, 200, 50);
+        headerLabel2.setBounds(105, 62, 200, 50);
         
-        medRegButton.setBounds(50, 170, 100, 100);
-        medRegLabel.setBounds(40,240,150,100);
+        medRegButton.setBounds(50, 200, 100, 100);
+        medRegLabel.setBounds(40,270,150,100);
         
-        docAppButton.setBounds(270, 170, 100, 100);
-        docAppLabel.setBounds(250,240,150,100);
+        docAppButton.setBounds(270, 200, 100, 100);
+        docAppLabel.setBounds(250,270,150,100);
                 
-        invoiceButton.setBounds(50,340,100,100);
-        invoiceLabel.setBounds(63,410,150,100);
+        invoiceButton.setBounds(50,370,100,100);
+        invoiceLabel.setBounds(63,440,150,100);
         
-        patientButton.setBounds(270,340,100,100);
-        patientLabel.setBounds(265,410,150,100);
+        patientButton.setBounds(270,370,100,100);
+        patientLabel.setBounds(265,440,150,100);
         
-        loginAs.setBounds(735,10,115,30);
-        titleBox.setBounds(580,50,90,30);
-        genderBox.setBounds(680,50,50,30);
-        nameTF.setBounds(735,50,100,30);
-        staffID.setBounds(735,80,100,30);
+        loginAs.setBounds(625,5,200,30);
+        titleBox.setBounds(605,40,70,30);
+        genderBox.setBounds(605,75,70,30);
+        nameTF.setBounds(680,40,100,30);
+        staffID.setBounds(680,75,100,30);
+        usernameLabel.setBounds(790,40,30,30);
+        passwordLabel.setBounds(790,75,30,30);
         inputName.setBounds(680,60,200,30);
         inputID.setBounds(680,80,200,30);
-        loginButton.setBounds(750,110,70,20);
-        signOut.setBounds(750,110,100,20);
+        loginButton.setBounds(680,112,70,20);
+        signOut.setBounds(680,112,100,20);
         
-        javaLogo.setBounds(220,10,50,68);
-        imageLabel.setBounds(0,0,870,610);
+        javaLogo.setBounds(220,30,50,68);
         versionLabel.setBounds(0,550,100,30);
         
         //button functions
@@ -192,6 +213,16 @@ public class MainMenu extends JFrame{
             }
             
         });
+        
+            ImageIcon hospitalImage = new ImageIcon(getClass().getResource("hopsital 4.png"));
+            imageLabel = new JLabel(hospitalImage);
+            container.add(imageLabel);
+            imageLabel.setBounds(0,0,870,610);
+            
+            medRegButton.setEnabled(false);
+            docAppButton.setEnabled(false);
+            invoiceButton.setEnabled(false);
+            patientButton.setEnabled(false);
 
         }
     
@@ -209,11 +240,18 @@ public class MainMenu extends JFrame{
                 nameTF.setVisible(false);
                 staffID.setVisible(false);
                 loginButton.setVisible(false);
-
+                usernameLabel.setVisible(false);
+                passwordLabel.setVisible(false);
+                
                 loginAs.setText("");
                 inputID.setText("");
                 inputName.setText( getGender + nameTF.getText() + " (" + getTitle + ")" );
                 inputID.setText("Staff ID : " + staffID.getText());
+                
+                medRegButton.setEnabled(true);
+                docAppButton.setEnabled(true);
+                invoiceButton.setEnabled(true);
+                patientButton.setEnabled(true);
                 
                 signOut.setVisible(true);
                  
@@ -229,6 +267,13 @@ public class MainMenu extends JFrame{
                 nameTF.setVisible(true);
                 staffID.setVisible(true);
                 loginButton.setVisible(true);
+                usernameLabel.setVisible(true);
+                passwordLabel.setVisible(true);
+                
+                medRegButton.setEnabled(false);
+                docAppButton.setEnabled(false);
+                invoiceButton.setEnabled(false);
+                patientButton.setEnabled(false);
                 
                 nameTF.setText("");
                 staffID.setText("");
@@ -244,8 +289,15 @@ public class MainMenu extends JFrame{
                 nameTF.setVisible(true);
                 staffID.setVisible(true);
                 loginButton.setVisible(true);
+                
+                medRegButton.setEnabled(false);
+                docAppButton.setEnabled(false);
+                invoiceButton.setEnabled(false);
+                patientButton.setEnabled(false);
+                
                 JOptionPane.showMessageDialog(MainMenu.this, "Please enter valid login details!");
             }
+            
         
         
     }
