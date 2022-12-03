@@ -141,7 +141,7 @@ public class MainMenu extends JFrame{
                 //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                 InvoiceButton invoice = new InvoiceButton();
                 invoice.setVisible(true);
-                invoice.setSize(800,600);
+                invoice.setSize(1200,600);
                 invoice.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 invoice.setResizable(false);
             }
