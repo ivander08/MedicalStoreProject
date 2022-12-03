@@ -160,6 +160,19 @@ public class MainMenu extends JFrame{
             }
             
         });
+        
+        patientButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                RegistrationForm rf = new RegistrationForm();
+                rf.setVisible(true);
+                rf.setSize(900,600);
+                rf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                rf.setResizable(false);
+            }
+            
+        });
 
         }
     
