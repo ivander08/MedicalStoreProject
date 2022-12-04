@@ -218,10 +218,10 @@ public class MainMenu extends JFrame{
             container.add(imageLabel);
             imageLabel.setBounds(0,0,870,610);
             
-            medRegButton.setEnabled(true);
-            docAppButton.setEnabled(true);
-            invoiceButton.setEnabled(true);
-            patientButton.setEnabled(true);
+            medRegButton.setEnabled(false);
+            docAppButton.setEnabled(false);
+            invoiceButton.setEnabled(false);
+            patientButton.setEnabled(false);
 
         }
     
