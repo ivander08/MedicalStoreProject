@@ -178,6 +178,10 @@ public class MedRegistration extends JFrame{
         deleteTF.setBounds(115,887,40,20);
         deleteButton.setBounds(155,887,80,20);
         
+        ImageIcon medBackgroundIcon = new ImageIcon(getClass().getResource("medregbackground.png"));
+        JLabel medBackground = new JLabel(medBackgroundIcon);
+        add(medBackground);
+        medBackground.setBounds(0,0,800,955);
         
     }
 }

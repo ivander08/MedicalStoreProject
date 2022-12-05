@@ -54,7 +54,7 @@ public class MainMenu extends JFrame{
         headerLabel2.setForeground(Color.WHITE);
         container.add(headerLabel2);
         
-        versionLabel = new JLabel("V1.0.0");
+        versionLabel = new JLabel("V1.7.3");
         container.add(versionLabel);
         
         
@@ -218,10 +218,10 @@ public class MainMenu extends JFrame{
             container.add(imageLabel);
             imageLabel.setBounds(0,0,870,610);
             
-            medRegButton.setEnabled(false);
-            docAppButton.setEnabled(false);
-            invoiceButton.setEnabled(false);
-            patientButton.setEnabled(false);
+            medRegButton.setEnabled(true);
+            docAppButton.setEnabled(true);
+            invoiceButton.setEnabled(true);
+            patientButton.setEnabled(true);
 
         }
     
@@ -247,10 +247,37 @@ public class MainMenu extends JFrame{
                 inputName.setText( getGender + nameTF.getText() + " (" + getTitle + ")" );
                 inputID.setText("Staff ID : " + staffID.getText());
                 
-                medRegButton.setEnabled(true);
-                docAppButton.setEnabled(true);
-                invoiceButton.setEnabled(true);
-                patientButton.setEnabled(true);
+                if((nameTF.getText().equals("willsen") && staffID.getText().equals("hey123")) || (nameTF.getText().equals("ivander") && staffID.getText().equals("hotdog08")) || (nameTF.getText().equals("gavriel") && staffID.getText().equals("tokek"))){
+                   medRegButton.setEnabled(true);
+                   docAppButton.setEnabled(true);
+                   invoiceButton.setEnabled(true);
+                   patientButton.setEnabled(true);
+                    JOptionPane.showMessageDialog(MainMenu.this, "Login succesful, valid account, features unlocked");
+                }
+                else{
+                    if(nameTF.getText().equals("") || staffID.getText().equals("") || genderBox.getSelectedItem().equals("")|| titleBox.getSelectedItem().equals("")){
+                        loginAs.setText("Input Login Details");
+                        inputID.setText("Staff ID : ");inputName.setText("");
+                
+                        signOut.setVisible(false);
+                        titleBox.setVisible(true);
+                        genderBox.setVisible(true);
+                        nameTF.setVisible(true);
+                        staffID.setVisible(true);
+                        loginButton.setVisible(true);
+                
+                        medRegButton.setEnabled(false);
+                        docAppButton.setEnabled(false);
+                        invoiceButton.setEnabled(false);
+                        patientButton.setEnabled(false);
+                
+                        JOptionPane.showMessageDialog(MainMenu.this, "Please enter valid login details");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(MainMenu.this, "Login succesful, invalid account, featured locked");
+                    }
+                }
+
                 
                 signOut.setVisible(true);
                  
@@ -276,29 +303,10 @@ public class MainMenu extends JFrame{
                 
                 nameTF.setText("");
                 staffID.setText("");
+                
+                JOptionPane.showMessageDialog(MainMenu.this, "Thank you for using Java Hospital's Medical Store Application!");
                 }
             
-            if(nameTF.getText().equals("") || staffID.getText().equals("") || genderBox.getSelectedItem().equals("")|| titleBox.getSelectedItem().equals("")){
-                loginAs.setText("Input Login Details");
-                inputID.setText("Staff ID : ");inputName.setText("");
-                
-                signOut.setVisible(false);
-                titleBox.setVisible(true);
-                genderBox.setVisible(true);
-                nameTF.setVisible(true);
-                staffID.setVisible(true);
-                loginButton.setVisible(true);
-                
-                medRegButton.setEnabled(false);
-                docAppButton.setEnabled(false);
-                invoiceButton.setEnabled(false);
-                patientButton.setEnabled(false);
-                
-                JOptionPane.showMessageDialog(MainMenu.this, "Please enter valid login details!");
-            }
-            
-        
-        
     }
     }
 }

@@ -7,6 +7,7 @@ package medicalstoreproject;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +29,6 @@ public class AppointmentButton extends JFrame {
     String column[] = {"NAME", "DOCTOR", "DATE", "REASON", "MOBILE"};
     String data[][] = {{"Ivander", "Gavriel", "3 December 2022", "Pneumonia", "081377758897"}};
     private JTable table;
-    int i = 8;
     
     AppointmentButton(){
         super("Doctor's Appointment List");
@@ -38,23 +38,23 @@ public class AppointmentButton extends JFrame {
         title.setFont(new Font("Helvetica",Font.BOLD,40));
         add(title);
         
-        name = new JLabel("Enter Patient Name = ");
+        name = new JLabel("Patient Name : ");
         name.setFont(new Font("Helvetica", Font.PLAIN, 20));
         name.setHorizontalAlignment(SwingConstants.RIGHT);
         add(name);
-        doctor = new JLabel("Enter Doctor Name = ");
+        doctor = new JLabel("Doctor Name : ");
         doctor.setFont(new Font("Helvetica", Font.PLAIN, 20));
         doctor.setHorizontalAlignment(SwingConstants.RIGHT);
         add(doctor);
-        date = new JLabel("Enter Date = ");
+        date = new JLabel("Appointment Date : ");
         date.setFont(new Font("Helvetica", Font.PLAIN, 20));
         date.setHorizontalAlignment(SwingConstants.RIGHT);
         add(date);
-        reason = new JLabel("Enter Reason = ");
+        reason = new JLabel("Reason : ");
         reason.setFont(new Font("Helvetica", Font.PLAIN, 20));
         reason.setHorizontalAlignment(SwingConstants.RIGHT);
         add(reason);
-        mobile = new JLabel("Enter Patient Mobile Number = ");
+        mobile = new JLabel("Patient Mobile Number : ");
         mobile.setFont(new Font("Helvetica", Font.PLAIN, 20));
         mobile.setHorizontalAlignment(SwingConstants.RIGHT);
         add(mobile);
@@ -83,14 +83,6 @@ public class AppointmentButton extends JFrame {
         tableModel.addColumn("DATE");
         tableModel.addColumn("REASON");
         tableModel.addColumn("MOBILE");
-        tableModel.insertRow(0, new Object[] {"Ivander", "Dr. Gavriel Joseph Lim","3 December 2022","Pneumonia Concerns","081377758897"});
-        tableModel.insertRow(1, new Object[] {"Gang Shih", "Dr. Willsen Yogi Prasetia","4 December 2022","Heart Problems","082175473478"});
-        tableModel.insertRow(2, new Object[] {"Chung Teng", "Dr. Gavriel Joseph Lim","6 December 2022","Chronic Headache","081258327555"});
-        tableModel.insertRow(3, new Object[] {"Heng Wu", "Dr. Ivander","7 December 2022","Back Problems","081327348234"});
-        tableModel.insertRow(4, new Object[] {"Cui Hsu", "Dr. Da-Xia Tao","9 December 2022","Steroid Consultation","082234213446"});
-        tableModel.insertRow(5, new Object[] {"Yue Ying Tseng", "Dr. Asep","13 December 2022","Unknown Knee Joint Pain","081300965904"});
-        tableModel.insertRow(6, new Object[] {"Lin Ch'iu", "Dr. Chyou Kao","13 December 2022","Chronic Headache","081234343463"});
-        tableModel.insertRow(7, new Object[] {"Lian Tai", "Dr. Tokek","15 December 2022","Psychological Consultation","085473829465"});
         add(tableScroll);
         
         
@@ -108,6 +100,7 @@ public class AppointmentButton extends JFrame {
                 String newReason = reasonField.getText();
                 String newMobile = mobileField.getText();
                 
+                int i = 0;
                 tableModel.insertRow(i, new Object[]{newName,newDoctor,newDate,newReason,newMobile});
                 
                 nameField.setText("");
@@ -164,6 +157,10 @@ public class AppointmentButton extends JFrame {
         deleteTF.setBounds(115,732,40,20);
         deleteButton.setBounds(155,732,80,20);
         
+        ImageIcon appointmentBackgroundIcon = new ImageIcon(getClass().getResource("appointmentbaackground.png"));
+        JLabel appointmentBackground = new JLabel(appointmentBackgroundIcon);
+        add(appointmentBackground);
+        appointmentBackground.setBounds(0,0,800,800);
         
     }
     

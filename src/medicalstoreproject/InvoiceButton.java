@@ -4,6 +4,7 @@
  */
 package medicalstoreproject;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -23,13 +25,15 @@ import javax.swing.JTextField;
  * @author ivand
  */
 public class InvoiceButton extends JFrame{
-    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, patientLabel, dateLabel;
-    private JLabel headerLabel3, headerLabel4, javaLogo2, invoiceTab, patientTab;
+    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, patientLabel, dateLabel, total;
+    private JLabel headerLabel3, headerLabel4, javaLogo2, invoiceTab, patientTab, nameInvoice, dateInvoice;
     private JTextField patientName, currentDate;
     private JTextArea productArea, quantityArea, priceArea;
     private JButton calculate;
     private JList productJList, quantityJList, priceJList;
     private JComboBox gender;
+    private String genderChoice, nameChoice, dateChoice, sumString;
+
     
     String genderList[] = {"Mr. ", "Mrs. "};
     
@@ -38,21 +42,21 @@ public class InvoiceButton extends JFrame{
         setLayout(null);
         
         //Label and Imaging
-        ImageIcon lineImage = new ImageIcon(getClass().getResource("invoiceLines.png"));
-        line = new JLabel(lineImage);
-        add(line);
-        ImageIcon javaImage = new ImageIcon(getClass().getResource("java.png"));
+        ImageIcon javaImage = new ImageIcon(getClass().getResource("java3.png"));
         javaLogo = new JLabel(javaImage);
         add(javaLogo);
         headerLabel = new JLabel("java hospital");
         headerLabel.setFont(new Font("Helvetica", Font.BOLD, 30));
+        headerLabel.setForeground(Color.WHITE);
         add(headerLabel);
         headerLabel2 = new JLabel("Taking care of Jakarta.");
         headerLabel2.setFont(new Font("Helvetica", Font.ITALIC, 10));
+        headerLabel2.setForeground(Color.WHITE);
         add(headerLabel2);
         
         invoiceLabel = new JLabel("invoice tab");
         invoiceLabel.setFont(new Font("Helvetica", Font.BOLD, 30));
+        invoiceLabel.setForeground(Color.WHITE);
         add(invoiceLabel);
         
         product = new JLabel("PRODUCT");
@@ -67,6 +71,7 @@ public class InvoiceButton extends JFrame{
         
         patientLabel = new JLabel("Patient Name");
         patientLabel.setFont(new Font("Helvetica",Font.PLAIN,15));
+        patientLabel.setForeground(Color.WHITE);
         add(patientLabel);
         patientName = new JTextField();
         patientName.setFont(new Font("Helvetica",Font.PLAIN,25));
@@ -77,6 +82,7 @@ public class InvoiceButton extends JFrame{
         
         dateLabel = new JLabel("Current Date");
         dateLabel.setFont(new Font("Helvetica",Font.PLAIN,15));
+        dateLabel.setForeground(Color.WHITE);
         add(dateLabel);
         currentDate = new JTextField();
         currentDate.setFont(new Font("Helvetica",Font.PLAIN,25));
@@ -95,37 +101,83 @@ public class InvoiceButton extends JFrame{
         JScrollPane priceScroll = new JScrollPane(priceArea);
         add(priceScroll);
         
+        nameInvoice = new JLabel("");
+        nameInvoice.setFont(new Font("Helvetica",Font.BOLD,10));
+        dateInvoice = new JLabel("");
+        dateInvoice.setFont(new Font("Helvetica",Font.PLAIN,10));
+        
+        add(dateInvoice);
+        add(nameInvoice);
+        nameInvoice.setBounds(1055, 8, 205, 50);
+        dateInvoice.setBounds(1055,23,205,50);
+        
+        sumString = "";
+        total = new JLabel("");
+        add(total);
+        total.setBounds(840,475,400,100);       
+        total.setFont(new Font("Helvetica",Font.BOLD,30));
+        
         calculate = new JButton("CALCULATE TOTAL");
         calculate.setFont(new Font("Helvetica",Font.BOLD,25));
         calculate.addActionListener(new ActionListener(){
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                String genderChoice = gender.getSelectedItem().toString();
-                String nameChoice = patientName.getText();
-                String dateChoice = currentDate.getText();
-                JLabel nameInvoice = new JLabel("Dear " + genderChoice + nameChoice);
-                nameInvoice.setFont(new Font("Helvetica",Font.BOLD,10));
-                JLabel dateInvoice = new JLabel(dateChoice);
-                dateInvoice.setFont(new Font("Helvetica",Font.PLAIN,10));
-                add(dateInvoice);
-                add(nameInvoice);
+                genderChoice = "";
+                nameChoice = "";
+                dateChoice = "";
+                sumString = "";
+                dateInvoice.setText("");
+                nameInvoice.setText("");
+                total.setText("");
                 
-                nameInvoice.setBounds(1055, 8, 205, 50);
-                dateInvoice.setBounds(1055,23,205,50);
+                genderChoice = gender.getSelectedItem().toString();
+                nameChoice= patientName.getText();
+                dateChoice= currentDate.getText();
                 
+                nameInvoice.setText("Dear " + genderChoice + nameChoice);
+                dateInvoice.setText(dateChoice);
                 String[] productList = productArea.getText().split("\\n");
+                boolean quantityCorrect = true;
+                boolean priceCorrect = true;
                 
                 String[] quantityListSTRING = quantityArea.getText().split("\\n");
                 int[] quantityList = new int[quantityListSTRING.length];
                 for(int i = 0; i < quantityListSTRING.length; i++){
-                    quantityList[i] = Integer.parseInt(quantityListSTRING[i]); 
+                    for(int j = 0; j < quantityListSTRING[i].length(); j++){
+                        if(quantityListSTRING[i].charAt(j) < '0' || quantityListSTRING[i].charAt(j) > '9'){
+                            quantityCorrect = false;
+                            quantityList[i] = 0;
+                            quantityListSTRING[i] = "-";
+                        }
+                    }
+                    if(quantityCorrect == false){
+                        JOptionPane.showMessageDialog(InvoiceButton.this, "Invalid Data: Quantity number " + (i+1) + " does not contain number");
+                }
+                    else{
+                        quantityList[i] = Integer.parseInt(quantityListSTRING[i]); 
+                    }
+                    quantityCorrect = true;
                 }
                 
                 String[] priceListSTRING = priceArea.getText().split("\\n");
                 int[] priceList = new int[priceListSTRING.length];
                 for(int i = 0; i < priceListSTRING.length; i++){
-                    priceList[i] = Integer.parseInt(priceListSTRING[i]); 
+                    for(int j = 0; j < priceListSTRING[i].length(); j++){
+                        if(priceListSTRING[i].charAt(j) < '0' || priceListSTRING[i].charAt(j) > '9'){
+                            priceCorrect = false;
+                            priceList[i] = 0;
+                            priceListSTRING[i] = "-";
+                        }
+                    }
+                    if(priceCorrect == false){
+                        JOptionPane.showMessageDialog(InvoiceButton.this, "Invalid Data: Price number " + (i+1) + " does not contain number");
+                    }
+                    else{
+                        priceList[i] = Integer.parseInt(priceListSTRING[i]); 
+                    }
+                    priceCorrect = true;
                 }     
                 
                 int[] priceListTOTAL = new int[priceList.length];
@@ -150,9 +202,9 @@ public class InvoiceButton extends JFrame{
                 priceJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
                 add(priceJListREAL);
                 
-                productJListREAL.setBounds(825,120,180,350);
-                quantityJListREAL.setBounds(1020,120,50,350);
-                priceJListREAL.setBounds(1085,120,80,350);
+                productJListREAL.setBounds(830,125,180,350);
+                quantityJListREAL.setBounds(1025,125,50,350);
+                priceJListREAL.setBounds(1090,125,80,350);
                 
                 int sum = 0;
                 
@@ -160,14 +212,10 @@ public class InvoiceButton extends JFrame{
                     sum += priceListTOTAL[i];
                 }
                 
-                String sumString;
                 sumString = String.valueOf(sum);
-                
-                JLabel total = new JLabel("Your Total is = $" + sumString);
-                total.setFont(new Font("Helvetica",Font.BOLD,30));
-                add(total);
-                
-                total.setBounds(850,470,400,100);
+                total.setText("Your total is: $" + sumString);
+                //alculate.setEnabled(false);
+                //JOptionPane.showMessageDialog(InvoiceButton.this, "In order to generate a new invoice, please reopen the window.");
             }
         });
         add(calculate);
@@ -194,11 +242,10 @@ public class InvoiceButton extends JFrame{
 
         
         //Bounding
-        line.setBounds(0,-30,1200,600);
-        headerLabel.setBounds(35, 20, 200, 50);
-        headerLabel2.setBounds(105, 42, 200, 50); 
-        javaLogo.setBounds(220,10,50,68);
-        invoiceLabel.setBounds(600, 20, 200, 50);
+        headerLabel.setBounds(35, 25, 200, 50);
+        headerLabel2.setBounds(105, 47, 200, 50); 
+        javaLogo.setBounds(220,15,50,68);
+        invoiceLabel.setBounds(600,30, 200, 50);
 
         product.setBounds(65,120,150,50);
         quantity.setBounds(325,120,150,50);
@@ -208,22 +255,28 @@ public class InvoiceButton extends JFrame{
         quantityScroll.setBounds(315,170,150,240);
         priceScroll.setBounds(575,170,150,240);
         
-        patientLabel.setBounds(80,440,120,50);
+        patientLabel.setBounds(80,445,120,50);
         patientName.setBounds(65,485,120,50);
-        dateLabel.setBounds(230,440,120,50);
+        dateLabel.setBounds(233,445,120,50);
         currentDate.setBounds(215,485,120,50);
         gender.setBounds(10,500,50,20);
         
-        calculate.setBounds(425,465,300,70);
+        calculate.setBounds(455,475,300,60);
         
-        javaLogo2.setBounds(950,10,38,52);
-        headerLabel3.setBounds(825, 10, 125, 50);
-        headerLabel4.setBounds(868, 28, 125, 50); 
-        invoiceTab.setBounds(860, 60, 300, 50);
+        javaLogo2.setBounds(960,8,38,52);
+        headerLabel3.setBounds(835, 8, 125, 50);
+        headerLabel4.setBounds(878, 26, 125, 50); 
+        invoiceTab.setBounds(870, 70, 300, 50);
         
-        productJList.setBounds(825,120,180,350);
-        quantityJList.setBounds(1020,120,50,350);
-        priceJList.setBounds(1085,120,80,350);
+        productJList.setBounds(830,125,180,350);
+        quantityJList.setBounds(1025,125,50,350);
+        priceJList.setBounds(1090,125,80,350);
+        
+        ImageIcon lineImage = new ImageIcon(getClass().getResource("invoicelayout.png"));
+        line = new JLabel(lineImage);
+        add(line);
+        
+        line.setBounds(0,-30,1200,600);
         
     }
 }
