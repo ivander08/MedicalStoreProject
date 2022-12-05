@@ -218,10 +218,10 @@ public class MainMenu extends JFrame{
             container.add(imageLabel);
             imageLabel.setBounds(0,0,870,610);
             
-            medRegButton.setEnabled(true);
-            docAppButton.setEnabled(true);
-            invoiceButton.setEnabled(true);
-            patientButton.setEnabled(true);
+            medRegButton.setEnabled(false);
+            docAppButton.setEnabled(false);
+            invoiceButton.setEnabled(false);
+            patientButton.setEnabled(false);
 
         }
     
@@ -233,55 +233,33 @@ public class MainMenu extends JFrame{
             if(e.getSource() == loginButton){
                 String getGender = String.valueOf(genderBox.getSelectedItem());
                 String getTitle = String.valueOf(titleBox.getSelectedItem());
-
-                titleBox.setVisible(false);
-                genderBox.setVisible(false);
-                nameTF.setVisible(false);
-                staffID.setVisible(false);
-                loginButton.setVisible(false);
-                usernameLabel.setVisible(false);
-                passwordLabel.setVisible(false);
-                
-                loginAs.setText("");
-                inputID.setText("");
-                inputName.setText( getGender + nameTF.getText() + " (" + getTitle + ")" );
-                inputID.setText("Staff ID : " + staffID.getText());
-                
-                if((nameTF.getText().equals("willsen") && staffID.getText().equals("hey123")) || (nameTF.getText().equals("ivander") && staffID.getText().equals("hotdog08")) || (nameTF.getText().equals("gavriel") && staffID.getText().equals("tokek"))){
+                if((nameTF.getText().equals("Willsen") && staffID.getText().equals("hey123")) || (nameTF.getText().equals("Ivander") && staffID.getText().equals("hotdog08")) || (nameTF.getText().equals("Gavriel") && staffID.getText().equals("tokek"))){
                    medRegButton.setEnabled(true);
                    docAppButton.setEnabled(true);
                    invoiceButton.setEnabled(true);
                    patientButton.setEnabled(true);
-                    JOptionPane.showMessageDialog(MainMenu.this, "Login succesful, valid account, features unlocked");
-                }
-                else{
-                    if(nameTF.getText().equals("") || staffID.getText().equals("") || genderBox.getSelectedItem().equals("")|| titleBox.getSelectedItem().equals("")){
-                        loginAs.setText("Input Login Details");
-                        inputID.setText("Staff ID : ");inputName.setText("");
+                   
+                   titleBox.setVisible(false);
+                   genderBox.setVisible(false);
+                   nameTF.setVisible(false);
+                   staffID.setVisible(false);
+                   loginButton.setVisible(false);
+                   usernameLabel.setVisible(false);
+                   passwordLabel.setVisible(false);
                 
-                        signOut.setVisible(false);
-                        titleBox.setVisible(true);
-                        genderBox.setVisible(true);
-                        nameTF.setVisible(true);
-                        staffID.setVisible(true);
-                        loginButton.setVisible(true);
-                
-                        medRegButton.setEnabled(false);
-                        docAppButton.setEnabled(false);
-                        invoiceButton.setEnabled(false);
-                        patientButton.setEnabled(false);
-                
-                        JOptionPane.showMessageDialog(MainMenu.this, "Please enter valid login details");
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(MainMenu.this, "Login succesful, invalid account, featured locked");
-                    }
+                   loginAs.setText("");
+                   inputID.setText("");
+                   inputName.setText( getGender + nameTF.getText() + " (" + getTitle + ")" );
+                   inputID.setText("Staff ID : " + staffID.getText());
+                   JOptionPane.showMessageDialog(MainMenu.this, "Login succesful, all features are unlocked");
+                   signOut.setVisible(true);
                 }
 
-                
-                signOut.setVisible(true);
-                 
+                else{
+                    JOptionPane.showMessageDialog(MainMenu.this, "Account not found, all features are locked");
+                }   
         } 
+
             if(e.getSource() == signOut){
                 loginAs.setText("Input Login Details");
                 inputID.setText("Staff ID : ");

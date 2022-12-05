@@ -8,7 +8,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -114,8 +117,8 @@ public class InvoiceButton extends JFrame{
         sumString = "";
         total = new JLabel("");
         add(total);
-        total.setBounds(840,475,400,100);       
-        total.setFont(new Font("Helvetica",Font.BOLD,30));
+        total.setBounds(865,480,400,100);       
+        total.setFont(new Font("Helvetica",Font.BOLD,20));
         
         calculate = new JButton("CALCULATE TOTAL");
         calculate.setFont(new Font("Helvetica",Font.BOLD,25));
@@ -212,8 +215,8 @@ public class InvoiceButton extends JFrame{
                     sum += priceListTOTAL[i];
                 }
                 
-                sumString = String.valueOf(sum);
-                total.setText("Your total is: $" + sumString);
+                sumString = String.format("%,d", sum); 
+                total.setText("Your total is: Rp" + sumString);
                 //alculate.setEnabled(false);
                 //JOptionPane.showMessageDialog(InvoiceButton.this, "In order to generate a new invoice, please reopen the window.");
             }
