@@ -5,13 +5,13 @@
 package medicalstoreproject;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigInteger;
-import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Locale;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,17 +29,33 @@ import javax.swing.JTextField;
  * @author ivand
  */
 public class InvoiceButton extends JFrame{
-    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, patientLabel, dateLabel, total;
+    private JLabel headerLabel, headerLabel2, javaLogo, invoiceLabel, product, quantity, price, line, patientLabel, dateLabel, total, invoiceBack, staffNameLabel;
     private JLabel headerLabel3, headerLabel4, javaLogo2, invoiceTab, patientTab, nameInvoice, dateInvoice;
     private JTextField patientName, currentDate;
     private JTextArea productArea, quantityArea, priceArea;
-    private JButton calculate;
-    private JList productJList, quantityJList, priceJList;
+    private JButton calculate, print;
+    private JList productJListREAL, quantityJListREAL, priceJListREAL;
     private JComboBox gender;
     private String genderChoice, nameChoice, dateChoice, sumString;
-
+    private JPanel invoicePrint;
     
     String genderList[] = {"Mr. ", "Mrs. "};
+    String staffName;
+
+    public void setName(String staffName){
+        this.staffName = staffName;
+    }
+    
+    public static BufferedImage getScreenshot(Component component){
+        BufferedImage image = new BufferedImage(component.getWidth(), component.getHeight(), BufferedImage.TYPE_INT_RGB);
+        component.paint(image.getGraphics());
+        return image;
+    }
+    
+    public static void SaveScreenShot(Component component, String filename) throws Exception{
+        BufferedImage img = getScreenshot(component);
+        ImageIO.write(img,"png", new File(filename));
+    }
     
     InvoiceButton(){
         super("Invoice");
@@ -104,26 +121,60 @@ public class InvoiceButton extends JFrame{
         JScrollPane priceScroll = new JScrollPane(priceArea);
         add(priceScroll);
         
+        invoicePrint = new JPanel();
+        invoicePrint.setLayout(null);
+        add(invoicePrint);
+        
         nameInvoice = new JLabel("");
         nameInvoice.setFont(new Font("Helvetica",Font.BOLD,10));
         dateInvoice = new JLabel("");
         dateInvoice.setFont(new Font("Helvetica",Font.PLAIN,10));
         
-        add(dateInvoice);
-        add(nameInvoice);
-        nameInvoice.setBounds(1055, 8, 205, 50);
-        dateInvoice.setBounds(1055,23,205,50);
+        invoicePrint.add(dateInvoice);
+        invoicePrint.add(nameInvoice);
+        nameInvoice.setBounds(255, 12, 205, 50);
+        dateInvoice.setBounds(255,24,205,50);
         
         sumString = "";
         total = new JLabel("");
-        add(total);
-        total.setBounds(865,480,400,100);       
+        invoicePrint.add(total);
+        total.setBounds(65,480,400,100);       
         total.setFont(new Font("Helvetica",Font.BOLD,20));
+        
+        print = new JButton("PRINT");
+        print.setFont(new Font("Helvetica", Font.BOLD, 25));
+        print.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                try{
+                    SaveScreenShot(invoicePrint,"invoice.png");
+                }
+                catch(Exception b){}
+            }
+            
+        });
+        add(print);
+        
+        staffNameLabel = new JLabel("");
+        staffNameLabel.setFont(new Font("Helvetica",Font.BOLD,10));
+        invoicePrint.add(staffNameLabel);
+        staffNameLabel.setBounds(255, 0, 205, 50);
+        
+        productJListREAL = new JList();
+        quantityJListREAL = new JList();
+        priceJListREAL = new JList();
+        productJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
+        invoicePrint.add(productJListREAL);       
+        quantityJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
+        invoicePrint.add(quantityJListREAL);  
+        priceJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
+        invoicePrint.add(priceJListREAL);
+        
         
         calculate = new JButton("CALCULATE TOTAL");
         calculate.setFont(new Font("Helvetica",Font.BOLD,25));
         calculate.addActionListener(new ActionListener(){
-            
             @Override
             public void actionPerformed(ActionEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -139,6 +190,7 @@ public class InvoiceButton extends JFrame{
                 nameChoice= patientName.getText();
                 dateChoice= currentDate.getText();
                 
+                staffNameLabel.setText("By " + staffName);
                 nameInvoice.setText("Dear " + genderChoice + nameChoice);
                 dateInvoice.setText(dateChoice);
                 String[] productList = productArea.getText().split("\\n");
@@ -193,21 +245,9 @@ public class InvoiceButton extends JFrame{
                     priceListTOTALString[i] = String.valueOf(priceListTOTAL[i]);
                 }
                 
-                JList productJListREAL = new JList(productList);
-                productJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
-                add(productJListREAL);
-                
-                JList quantityJListREAL = new JList(quantityListSTRING);
-                quantityJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
-                add(quantityJListREAL);
-                
-                JList priceJListREAL = new JList(priceListTOTALString);
-                priceJListREAL.setFont(new Font("Helvetica",Font.PLAIN,15));
-                add(priceJListREAL);
-                
-                productJListREAL.setBounds(830,125,180,350);
-                quantityJListREAL.setBounds(1025,125,50,350);
-                priceJListREAL.setBounds(1090,125,80,350);
+                productJListREAL.setListData(productList);
+                quantityJListREAL.setListData(quantityListSTRING);
+                priceJListREAL.setListData(priceListSTRING);
                 
                 int sum = 0;
                 
@@ -223,28 +263,31 @@ public class InvoiceButton extends JFrame{
         });
         add(calculate);
         
+
+                
+        productJListREAL.setBounds(15,128,180,350);
+        quantityJListREAL.setBounds(210,128,50,350);
+        priceJListREAL.setBounds(275,128,80,350);
+        
+        
         ImageIcon javaImage2 = new ImageIcon(getClass().getResource("java2.png"));
         javaLogo2 = new JLabel(javaImage2);
-        add(javaLogo2);
+        invoicePrint.add(javaLogo2);
         headerLabel3 = new JLabel("java hospital");
         headerLabel3.setFont(new Font("Helvetica", Font.BOLD, 20));
-        add(headerLabel3);
+        invoicePrint.add(headerLabel3);
         headerLabel4 = new JLabel("Taking care of Jakarta.");
         headerLabel4.setFont(new Font("Helvetica", Font.ITALIC,8));
-        add(headerLabel4);
+        invoicePrint.add(headerLabel4);
         invoiceTab = new JLabel("MEDICAL INVOICE");
         invoiceTab.setFont(new Font("Helvetica", Font.BOLD, 30));
-        add(invoiceTab);
-        
-        productJList = new JList();
-        add(productJList);
-        quantityJList = new JList();
-        add(quantityJList);
-        priceJList = new JList();
-        add(priceJList);
+        invoicePrint.add(invoiceTab);
+
+        add(invoicePrint);
 
         
         //Bounding
+        invoicePrint.setBounds(816,0,370,560);
         headerLabel.setBounds(35, 25, 200, 50);
         headerLabel2.setBounds(105, 47, 200, 50); 
         javaLogo.setBounds(220,15,50,68);
@@ -264,22 +307,25 @@ public class InvoiceButton extends JFrame{
         currentDate.setBounds(215,485,120,50);
         gender.setBounds(10,500,50,20);
         
-        calculate.setBounds(455,475,300,60);
+        calculate.setBounds(500,475,300,60);
+        print.setBounds(350,475,150,60);
         
-        javaLogo2.setBounds(960,8,38,52);
-        headerLabel3.setBounds(835, 8, 125, 50);
-        headerLabel4.setBounds(878, 26, 125, 50); 
-        invoiceTab.setBounds(870, 70, 300, 50);
         
-        productJList.setBounds(830,125,180,350);
-        quantityJList.setBounds(1025,125,50,350);
-        priceJList.setBounds(1090,125,80,350);
+        javaLogo2.setBounds(140,6,38,52);
+        headerLabel3.setBounds(15, 6, 125, 50);
+        headerLabel4.setBounds(58, 25, 125, 50); 
+        invoiceTab.setBounds(50, 70, 300, 50);
         
         ImageIcon lineImage = new ImageIcon(getClass().getResource("invoicelayout.png"));
         line = new JLabel(lineImage);
         add(line);
         
         line.setBounds(0,-30,1200,600);
+        
+        ImageIcon invoiceIcon = new ImageIcon(getClass().getResource("invoicePrintbackground.png"));
+        invoiceBack = new JLabel(invoiceIcon);
+        invoicePrint.add(invoiceBack);
+        invoiceBack.setBounds(0,-30,384,600);
         
     }
 }

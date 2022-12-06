@@ -26,8 +26,7 @@ public class MainMenu extends JFrame{
     private Object[] titleList = {"", "Nurse", "Doctor", "Receptionist", "Dentist", "Surgeon", "Pharmacist"};
     private Object[] genderList = {"", "Mr. ", "Mrs. "};
     
-    
-    public MainMenu(){
+    MainMenu(){
         super("Medical Store Application");
         JFrame frame = new JFrame();
         
@@ -171,6 +170,7 @@ public class MainMenu extends JFrame{
                 invoice.setSize(1200,600);
                 invoice.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 invoice.setResizable(false);
+                invoice.setName(nameTF.getText());
             }
             
         });
@@ -201,6 +201,7 @@ public class MainMenu extends JFrame{
             
         });
         
+        
         medRegButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,10 +219,10 @@ public class MainMenu extends JFrame{
             container.add(imageLabel);
             imageLabel.setBounds(0,0,870,610);
             
-            medRegButton.setEnabled(false);
-            docAppButton.setEnabled(false);
-            invoiceButton.setEnabled(false);
-            patientButton.setEnabled(false);
+            medRegButton.setEnabled(true);
+            docAppButton.setEnabled(true);
+            invoiceButton.setEnabled(true);
+            patientButton.setEnabled(true);
 
         }
     
