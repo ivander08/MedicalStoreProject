@@ -138,7 +138,7 @@ public class InvoiceButton extends JFrame{
         sumString = "";
         total = new JLabel("");
         invoicePrint.add(total);
-        total.setBounds(65,480,400,100);       
+        total.setBounds(60,480,400,100);       
         total.setFont(new Font("Helvetica",Font.BOLD,20));
         
         print = new JButton("PRINT");
@@ -247,7 +247,7 @@ public class InvoiceButton extends JFrame{
                 
                 productJListREAL.setListData(productList);
                 quantityJListREAL.setListData(quantityListSTRING);
-                priceJListREAL.setListData(priceListSTRING);
+                priceJListREAL.setListData(priceListTOTALString);
                 
                 int sum = 0;
                 
