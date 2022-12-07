@@ -170,7 +170,7 @@ public class MainMenu extends JFrame{
                 invoice.setSize(1200,600);
                 invoice.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 invoice.setResizable(false);
-                invoice.setName(nameTF.getText());
+                invoice.setName(nameTF.getText(), String.valueOf(genderBox.getSelectedItem()));
             }
             
         });

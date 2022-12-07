@@ -40,10 +40,14 @@ public class InvoiceButton extends JFrame{
     private JPanel invoicePrint;
     
     String genderList[] = {"Mr. ", "Mrs. "};
-    String staffName;
+    String staffName, genderName;
 
     public void setName(String staffName){
         this.staffName = staffName;
+    }
+    public void setName(String staffName, String genderName){
+        this.staffName = staffName;
+        this.genderName = genderName;
     }
     
     public static BufferedImage getScreenshot(Component component){
@@ -194,7 +198,7 @@ public class InvoiceButton extends JFrame{
                 nameChoice= patientName.getText();
                 dateChoice= currentDate.getText();
                 
-                staffNameLabel.setText("By " + staffName);
+                staffNameLabel.setText("By " + genderName + staffName);
                 nameInvoice.setText("Dear " + genderChoice + nameChoice);
                 dateInvoice.setText(dateChoice);
                 
