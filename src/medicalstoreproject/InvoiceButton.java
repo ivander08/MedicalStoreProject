@@ -186,6 +186,10 @@ public class InvoiceButton extends JFrame{
                 nameInvoice.setText("");
                 total.setText("");
                 
+
+                boolean quantityCorrect = true;
+                boolean priceCorrect = true;
+                
                 genderChoice = gender.getSelectedItem().toString();
                 nameChoice= patientName.getText();
                 dateChoice= currentDate.getText();
@@ -193,10 +197,9 @@ public class InvoiceButton extends JFrame{
                 staffNameLabel.setText("By " + staffName);
                 nameInvoice.setText("Dear " + genderChoice + nameChoice);
                 dateInvoice.setText(dateChoice);
-                String[] productList = productArea.getText().split("\\n");
-                boolean quantityCorrect = true;
-                boolean priceCorrect = true;
                 
+                String[] productList = productArea.getText().split("\\n");
+
                 String[] quantityListSTRING = quantityArea.getText().split("\\n");
                 int[] quantityList = new int[quantityListSTRING.length];
                 for(int i = 0; i < quantityListSTRING.length; i++){
@@ -257,6 +260,7 @@ public class InvoiceButton extends JFrame{
                 
                 sumString = String.format("%,d", sum); 
                 total.setText("Your total is: Rp" + sumString);
+                
                 //alculate.setEnabled(false);
                 //JOptionPane.showMessageDialog(InvoiceButton.this, "In order to generate a new invoice, please reopen the window.");
             }
